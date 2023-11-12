@@ -15,7 +15,6 @@ import java.util.List;
 @Table(name = "book")
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String name;
     private String author;
@@ -25,9 +24,6 @@ public class Book {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id")
     private Category category;
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "supplier_id")
-    private Supplier supplier;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "book")
     private List<BookBorrow> bookBorrowList;

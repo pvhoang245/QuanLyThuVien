@@ -14,8 +14,7 @@ import java.util.List;
 @Table(name = "reader")
 public class Reader {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
     private String name;
     private String phone;
     private String email;
