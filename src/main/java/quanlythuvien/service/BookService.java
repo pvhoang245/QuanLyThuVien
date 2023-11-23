@@ -9,4 +9,5 @@ public interface BookService {
     Book findBookById(String id);
     List<Book> getAllBooks();
     Book deleteBook(String id);
+    List<Book> search(String content);
 }

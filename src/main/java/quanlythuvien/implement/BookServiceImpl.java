@@ -35,5 +35,10 @@ public class BookServiceImpl implements BookService {
         return null;
     }
 
+    @Override
+    public List<Book> search(String content) {
+        return bookRepository.search(content);
+    }
+
 
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import quanlythuvien.model.Reader;
 import quanlythuvien.service.ReaderService;
 
+import java.util.List;
+
 @Controller
 public class ReaderController {
     @Autowired
@@ -61,6 +63,11 @@ public class ReaderController {
     public String deleteReader(@PathVariable String id) {
         readerService.deleteReader(id);
         return "redirect:/readers";
+    }
+
+    @GetMapping("/search/{content}")
+    public List<Reader> searchReader(@PathVariable String content) {
+        return readerService.searchReader(content);
     }
 
 }

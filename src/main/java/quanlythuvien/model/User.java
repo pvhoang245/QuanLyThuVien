@@ -28,9 +28,6 @@ public class User {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
     private List<BookBorrow> bookBorrowList;
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
-    private List<BookReturn> bookReturnList;
     public User() {
 
     }

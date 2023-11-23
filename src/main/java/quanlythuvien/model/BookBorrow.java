@@ -15,8 +15,8 @@ public class BookBorrow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Date dateStart;
-    private Date dateEnd;
+    private Date dateBorrow;
+    private Date dateReturn;
     private String status;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "book_id")

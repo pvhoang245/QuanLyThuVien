@@ -35,5 +35,10 @@ public class ReaderServiceImpl implements ReaderService {
         return null;
     }
 
+    @Override
+    public List<Reader> searchReader(String content) {
+        return readerRepository.search(content);
+    }
+
 
 }

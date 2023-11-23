@@ -9,4 +9,5 @@ public interface ReaderService {
     Reader findReaderById(String id);
     List<Reader> getAllReaders();
     Reader deleteReader(String id);
+    List<Reader> searchReader(String content);
 }

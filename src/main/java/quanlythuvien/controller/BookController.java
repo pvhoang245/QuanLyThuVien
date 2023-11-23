@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import quanlythuvien.dto.Keyword;
 import quanlythuvien.model.Book;
 import quanlythuvien.service.BookService;
 import quanlythuvien.service.CategoryService;
 
+import java.util.List;
 @Controller
+@CrossOrigin
 public class BookController {
     @Autowired
     private BookService bookService;
@@ -16,9 +19,16 @@ public class BookController {
     private CategoryService categoryService;
 
     @GetMapping("/books")
-    public String book(Model model) {
+    public String book(@RequestParam("userId") String userId, Model model) {
         model.addAttribute("books", bookService.getAllBooks());
+        model.addAttribute("userId", userId);
         return "book";
+    }
+
+    @GetMapping("books/{id}")
+    @ResponseBody
+    public Book getOne(@PathVariable String id) {
+        return bookService.findBookById(id);
     }
 
     @GetMapping("/books/new")
@@ -67,4 +77,12 @@ public class BookController {
         return "redirect:/books";
     }
 
+    @PostMapping("/search/{content}")
+    @ResponseBody
+    public List<Book> searchProduct(@PathVariable String content) {
+        if (content.equals(null) || content.equals("")) {
+            return bookService.getAllBooks();
+        }
+        else return bookService.search(content);
+    }
 }
