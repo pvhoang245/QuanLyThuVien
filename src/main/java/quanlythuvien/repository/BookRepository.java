@@ -17,4 +17,6 @@ public interface BookRepository extends JpaRepository<Book, String> {
             + "LOWER(p.author) LIKE LOWER(CONCAT('%', :keyword, '%'))"
     )
     List<Book> search(@Param("keyword") String keyword);
+    @Query("select p from Book p where p.id = :id")
+    Book checkBook(String id);
 }

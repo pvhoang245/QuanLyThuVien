@@ -2,6 +2,7 @@ package quanlythuvien.implement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import quanlythuvien.model.User;
 import quanlythuvien.repository.UserRepository;
 import quanlythuvien.service.UserService;
@@ -35,8 +36,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User deleteUser(int id) {
-        userRepository.deleteById(id);
+    public User deleteNgdung(int id) {
+        User u = findUserById(id);
+        userRepository.delete(u);
         return null;
     }
 

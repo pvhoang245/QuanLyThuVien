@@ -8,10 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import quanlythuvien.dto.BookBorrowDto;
 import quanlythuvien.dto.Keyword;
+import quanlythuvien.model.Book;
 import quanlythuvien.model.BookBorrow;
 import quanlythuvien.service.BookService;
 import quanlythuvien.service.BorrowService;
 import quanlythuvien.service.ReaderService;
+
+import java.util.List;
 
 @Controller
 public class BorrowController {
@@ -37,11 +40,12 @@ public class BorrowController {
         return "borrow_2";
     }
 
+
     @PostMapping("/bookborrow/add")
     @ResponseBody
-    public ResponseEntity<BookBorrow> addBorrowBook(@RequestBody BookBorrowDto p){
-        BookBorrow bookBorrow = borrowService.add(p);
-        return new ResponseEntity<BookBorrow>(bookBorrow, HttpStatus.OK);
+    public BookBorrow addBorrowBook(@RequestBody BookBorrowDto p){
+        borrowService.add(p);
+        return null;
     }
 
     @GetMapping("/bookborrow/book/{readerId}")
@@ -51,8 +55,36 @@ public class BorrowController {
     }
 
     @GetMapping("/bookreturn")
-    public String returnSearchBook() {
+    public String bookReturn(Model model) {
+        Keyword keyword = new Keyword();
+        model.addAttribute("content", keyword);
         return "return_1";
+    }
+
+    @PostMapping("/bookreturn")
+    public String resultReaderReturn(@ModelAttribute("content") Keyword keyword, Model model) {
+        model.addAttribute("readers", readerService.searchReader(keyword.getName()));
+        return "return_2";
+    }
+
+    @PostMapping("/bookreturn/add")
+    @ResponseBody
+    public BookBorrow returnBook(@RequestBody BookBorrowDto p){
+        borrowService.update(p);
+        return null;
+    }
+    @PostMapping("/bookreturn/find")
+    @ResponseBody
+    public BookBorrow findBookBorrow(@RequestBody BookBorrowDto p){
+        return borrowService.getByUserReaderId(p);
+    }
+
+    @GetMapping("/bookreturn/book/{readerId}")
+    public String returnSearchBook(@PathVariable String readerId, Model model) {
+        model.addAttribute("reader", readerService.findReaderById(readerId));
+        List<Book> list = borrowService.findReturnBook(readerId);
+        model.addAttribute("listBorrowBooks", list);
+        return "return_3";
     }
 
 

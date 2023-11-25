@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import quanlythuvien.dto.UserDto;
+import quanlythuvien.model.Account;
 import quanlythuvien.model.User;
 import quanlythuvien.service.AccountService;
 import quanlythuvien.service.UserService;
-import quanlythuvien.service.CategoryService;
 
 @Controller
 public class UserController {
@@ -27,16 +28,28 @@ public class UserController {
 
     @GetMapping("/users/new")
     public String createUser(Model model) {
-        User user = new User();
-        model.addAttribute("newUser", user);
-        model.addAttribute("accounts", accountService.getALlAccounts());
+        UserDto userDto = new UserDto();
+        model.addAttribute("newUser", userDto);
         return "create_user";
     }
 
     @PostMapping("/users/new")
-    public String saveUser(@ModelAttribute("newUser") User user) {
-        User user1 = new User();
-        return mapUser(user, user1);
+    public String saveUser(@ModelAttribute("newUser") UserDto userDto) {
+        Account account = new Account();
+        account.setUsername(userDto.getUsername());
+        account.setPassword(userDto.getPassword());
+        account.setRoll(userDto.getRoll());
+        accountService.createAccount(account);
+        int id = accountService.findAccountByUsername(userDto.getUsername()).getId();
+        User user = new User();
+        user.setName(userDto.getName());
+        user.setJob(userDto.getJob());
+        user.setPhone(userDto.getPhone());
+        user.setEmail(userDto.getEmail());
+        user.setOther(userDto.getOther());
+        user.setAccount(accountService.getById(id));
+        userService.saveUser(user);
+        return "redirect:/users";
     }
 
     @GetMapping("/users/update/{id}")
@@ -60,14 +73,13 @@ public class UserController {
         user1.setPhone(user.getPhone());
         user1.setEmail(user.getEmail());
         user1.setOther(user.getOther());
-        user1.setAccount(accountService.getById(user.getAccount().getId()));
         userService.saveUser(user1);
         return "redirect:/users";
     }
 
     @GetMapping("/users/delete/{id}")
-    public String deleteUser(@PathVariable int id) {
-        userService.deleteUser(id);
+    public String deleteNgdung(@PathVariable int id) {
+        userService.deleteNgdung(id);
         return "redirect:/users";
     }
 

@@ -33,4 +33,13 @@ public class AccountServiceImpl implements AccountService {
     public Account getById(int id) {
         return accountRepository.findById(id).get();
     }
+
+    @Override
+    public Account createAccount(Account account) {
+        return accountRepository.save(account);
+    }
+    @Override
+    public Account findAccountByUsername(String username) {
+        return accountRepository.findAccountByUsername(username);
+    }
 }

@@ -3,12 +3,12 @@ package quanlythuvien.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import quanlythuvien.model.Book;
 import quanlythuvien.model.Category;
 import quanlythuvien.service.CategoryService;
+
+import java.util.List;
 
 @Controller
 public class CategoryController {
@@ -23,6 +23,7 @@ public class CategoryController {
     @GetMapping("/categories/new")
     public String createCategory(Model model) {
         Category category = new Category();
+        category.setId(categoryService.getFinalCategory());
         model.addAttribute("newCategory", category);
         return "create_category";
     }
@@ -60,5 +61,17 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
+    @GetMapping("/categories/getfinal")
+    public int countFinalCategory() {
+        return categoryService.getFinalCategory();
+    }
+
+    @PostMapping("/categories/search/{content}")
+    @ResponseBody
+    public String searchCategory(@PathVariable String content) {
+        Category category = categoryService.getCategoryByname(content);
+        if (category!=null) return "true";
+        else return "false";
+    }
 
 }

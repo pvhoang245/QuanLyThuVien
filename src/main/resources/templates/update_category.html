@@ -71,19 +71,6 @@
     </ul>
     <div id="clock"></div>
   </div>
-  <div style="display: flex;flex-wrap: wrap;justify-content: space-between;">
-    <div style="width: 20%;">
-      <label style="font-weight: bold;font-size: 20px;">Thêm sản phẩm</label>
-      <button class="btn btn-primary btn-sm trash" type="button" title="Create" data-toggle="modal" data-target="#createModal" id="add_product">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-      </button>
-    </div>
-    <div style="width: 25%;">
-      <input type="text" style="width: 300px;height: 30px;" id="searchPro" onkeyup="searchProduct()">
-      <button class="btn btn-primary btn-sm trash" disabled>Tìm kiếm</button>
-
-    </div>
-  </div>
   <div class="modal-content">
     <div class="modal-body">
       <div class="row">
@@ -106,7 +93,7 @@
         </div>
         <BR>
         <button class="btn btn-save" type="submit">Lưu lại</button>
-        <a class="btn btn-cancel" data-dismiss="modal" href="#" onclick="location.reload()">Hủy bỏ</a>
+        <a class="btn btn-cancel" data-dismiss="modal" th:href="@{/categories}" onclick="location.reload()">Hủy bỏ</a>
         <BR>
       </form>
     </div>

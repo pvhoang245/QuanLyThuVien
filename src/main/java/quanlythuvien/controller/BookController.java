@@ -1,9 +1,12 @@
 package quanlythuvien.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import quanlythuvien.dto.BookBorrowDto;
 import quanlythuvien.dto.Keyword;
 import quanlythuvien.model.Book;
 import quanlythuvien.service.BookService;
@@ -19,7 +22,7 @@ public class BookController {
     private CategoryService categoryService;
 
     @GetMapping("/books")
-    public String book(@RequestParam("userId") String userId, Model model) {
+    public String book(@ModelAttribute("userId") String userId, Model model) {
         model.addAttribute("books", bookService.getAllBooks());
         model.addAttribute("userId", userId);
         return "book";
@@ -29,6 +32,14 @@ public class BookController {
     @ResponseBody
     public Book getOne(@PathVariable String id) {
         return bookService.findBookById(id);
+    }
+
+    @GetMapping("books/check/{id}")
+    @ResponseBody
+    public String getOneBook(@PathVariable String id) {
+        Book book=  bookService.checkBook(id);
+        if(book!=null) return "true";
+        else return "false";
     }
 
     @GetMapping("/books/new")
@@ -77,12 +88,18 @@ public class BookController {
         return "redirect:/books";
     }
 
-    @PostMapping("/search/{content}")
+    @PostMapping("/books/search/{content}")
     @ResponseBody
-    public List<Book> searchProduct(@PathVariable String content) {
+    public List<Book> searchBook(@PathVariable String content) {
         if (content.equals(null) || content.equals("")) {
             return bookService.getAllBooks();
         }
         else return bookService.search(content);
+    }
+
+    @PostMapping("/books/checkNumber")
+    @ResponseBody
+    public List<String> checkNumberBook(@RequestBody BookBorrowDto bookBorrowDto) {
+        return bookService.checkNumberBook(bookBorrowDto.getBook());
     }
 }

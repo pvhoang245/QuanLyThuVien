@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+
+    <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
     <!--  <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css}">-->
     <!--  &lt;!&ndash; or &ndash;&gt;-->
     <!--  <link rel="stylesheet" th:href="@{https://unpkg.com/boxicons@latest/css/boxicons.min.css}">-->
@@ -17,7 +19,7 @@
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js}"></script>
     <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}">
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css}">
-<!--    <script th:src="@{./js/app.js}"></script>-->
+    <script th:src="@{/js/app.js}"></script>
     <script th:src="@{https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js}"></script>
     <script th:src="@{https://www.gstatic.com/firebasejs/7.0.0/firebase-storage.js}"></script>
 
@@ -69,20 +71,10 @@
         <ul class="app-breadcrumb breadcrumb side">
             <li class="breadcrumb-item active"><a th:href="@{#}"><b>Thêm sách</b></a></li>
         </ul>
-        <div id="clock"></div>
-    </div>
-    <div style="display: flex;flex-wrap: wrap;justify-content: space-between;">
-        <div style="width: 20%;">
-            <label style="font-weight: bold;font-size: 20px;">Thêm sách</label>
-            <button class="btn btn-primary btn-sm trash" type="button" title="Create" data-toggle="modal" data-target="#createModal" id="add_product">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-            </button>
-        </div>
-        <div style="width: 25%;">
-            <input type="text" style="width: 300px;height: 30px;" id="searchPro" onkeyup="searchProduct()">
-            <button class="btn btn-primary btn-sm trash" disabled>Tìm kiếm</button>
+        <div class="notification hide notification_hide">
 
         </div>
+        <div id="clock"></div>
     </div>
             <div class="modal-content">
                 <div class="modal-body">
@@ -113,7 +105,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label"> So lượt mượn </label>
-                                <input class="form-control" name="borrowNumber" type="text" th:field="*{borrowNumber}">
+                                <input class="form-control" name="borrowNumber" type="number" th:field="*{borrowNumber}" readonly>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label"> Vị trí </label>
@@ -131,10 +123,11 @@
                                       </div>
                         </div>
                         <BR>
-                        <button class="btn btn-save" type="submit">Lưu lại</button>
-                        <a class="btn btn-cancel" data-dismiss="modal" th:href="@{/books}">Hủy bỏ</a>
+                        <button class="btn btn-save hide" id="saveNewBook" type="submit">Lưu lại</button>
                         <BR>
                     </form>
+                    <button class="btn btn-save" onclick="checkSaveBook()">Lưu lại</button>
+                    <a class="btn btn-cancel" th:href="@{/books}">Hủy bỏ</a>
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -144,19 +137,19 @@
 
 
 <!-- Essential javascripts for application to work-->
-<script th:src="@{js/jquery-3.2.1.min.js}"></script>
-<script th:src="@{js/popper.min.js}"></script>
-<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{/js/plugins/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/plugins/popper.min.js}"></script>
+<script th:src="@{/js/plugins/bootstrap.min.js}"></script>
 <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js}"></script>
-<script th:src="@{src/jquery.table2excel.js}"></script>
+<!--<script th:src="@{src/jquery.table2excel.js}"></script>-->
 <!-- <script th:src="@{s/main.js"></script> -->
 <!-- The javascript plugin to display page loading on top-->
-<script th:src="@{js/plugins/pace.min.js}"></script>
+<script th:src="@{/js/plugins/pace.min.js}"></script>
 <!-- Page specific javascripts-->
 <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js}"></script>
 <!-- Data table plugin-->
-<script type="text/javascript" th:src="@{js/plugins/jquery.dataTables.min.js}"></script>
-<script type="text/javascript" th:src="@{js/plugins/dataTables.bootstrap.min.js}"></script>
+<script th:src="@{/js/plugins/jquery.dataTables.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/plugins/dataTables.bootstrap.min.js}" type="text/javascript"></script>
 <script type="text/javascript">
     $('#sampleTable').DataTable();
     //Thời Gian
@@ -201,5 +194,5 @@
     }
 </script>
 </body>
-
+<script th:src="@{/js/app.js}"></script>
 </html>

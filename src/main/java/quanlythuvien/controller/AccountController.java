@@ -30,12 +30,10 @@ public class AccountController {
     @PostMapping("/home")
     public String login(@ModelAttribute("account") Account account, RedirectAttributes redirectAttributes) throws AccountException {
         Account account1 = accountService.login(account.getUsername());
-        if (account1.getPassword().equals(account.getPassword()))
-        {
-            redirectAttributes.addAttribute("userId", userService.findUserByAccountId(account1.getId()).getId());
+        if (account1.getPassword().equals(account.getPassword())) {
+            redirectAttributes.addFlashAttribute("userId", userService.findUserByAccountId(account1.getId()).getId());
             return "redirect:/books";
-        }
-        else {
+        } else {
             System.out.println("Sai password");
             return "home";
         }

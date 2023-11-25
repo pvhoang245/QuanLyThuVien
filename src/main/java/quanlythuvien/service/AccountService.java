@@ -9,4 +9,7 @@ public interface AccountService {
     Account login(String username) throws AccountException;
     List<Account> getALlAccounts();
     Account getById(int id);
+    Account createAccount(Account account);
+
+    Account findAccountByUsername(String username);
 }

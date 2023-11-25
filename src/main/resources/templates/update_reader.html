@@ -71,36 +71,23 @@
     </ul>
     <div id="clock"></div>
   </div>
-  <div style="display: flex;flex-wrap: wrap;justify-content: space-between;">
-    <div style="width: 20%;">
-      <label style="font-weight: bold;font-size: 20px;">Thêm sản phẩm</label>
-      <button class="btn btn-primary btn-sm trash" type="button" title="Create" data-toggle="modal" data-target="#createModal" id="add_product">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-      </button>
-    </div>
-    <div style="width: 25%;">
-      <input type="text" style="width: 300px;height: 30px;" id="searchPro" onkeyup="searchProduct()">
-      <button class="btn btn-primary btn-sm trash" disabled>Tìm kiếm</button>
-
-    </div>
-  </div>
   <div class="modal-content">
     <div class="modal-body">
       <div class="row">
         <div class="form-group col-md-12">
                             <span class="thong-tin-thanh-toan">
-                                <h5>Thêm người dùng</h5>
+                                <h5>Chỉnh sửa thông tin độc giả</h5>
                             </span>
         </div>
       </div>
       <form th:action="@{/readers/update/{id}(id=${updateReader.id})}" th:object = "${updateReader}" method="POST">
         <div class="row">
           <div class="form-group col-md-6">
-            <label class="control-label"> Mã người dùng</label>
+            <label class="control-label"> Mã độc giả</label>
             <input class="form-control" name="id" type="text" th:field="*{id}" readonly>
           </div>
           <div class="form-group col-md-6">
-            <label class="control-label"> Tên người dùng</label>
+            <label class="control-label"> Tên độc giả</label>
             <input class="form-control" name="name" type="text" th:field="*{name}">
           </div>
           <div class="form-group col-md-6">
@@ -118,7 +105,7 @@
         </div>
         <BR>
         <button class="btn btn-save" type="submit">Lưu lại</button>
-        <a class="btn btn-cancel" data-dismiss="modal" href="#" onclick="location.reload()">Hủy bỏ</a>
+        <a class="btn btn-cancel" th:href="@{/readers}" onclick="location.reload()">Hủy bỏ</a>
         <BR>
       </form>
     </div>

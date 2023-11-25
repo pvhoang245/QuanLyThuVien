@@ -3,10 +3,8 @@ package quanlythuvien.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import quanlythuvien.model.Book;
 import quanlythuvien.model.Reader;
 import quanlythuvien.service.ReaderService;
 
@@ -65,9 +63,13 @@ public class ReaderController {
         return "redirect:/readers";
     }
 
-    @GetMapping("/search/{content}")
+    @PostMapping("/readers/search/{content}")
+    @ResponseBody
     public List<Reader> searchReader(@PathVariable String content) {
-        return readerService.searchReader(content);
+        if (content.equals(null) || content.equals("")) {
+            return readerService.getAllReaders();
+        }
+        else return readerService.searchReader(content);
     }
 
 }

@@ -32,4 +32,14 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.deleteById(id);
         return null;
     }
+
+    @Override
+    public int getFinalCategory() {
+        return categoryRepository.getFinalCategory().getId()+1;
+    }
+
+    @Override
+    public Category getCategoryByname(String content) {
+        return categoryRepository.getCategoryByName(content);
+    }
 }

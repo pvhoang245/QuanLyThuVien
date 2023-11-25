@@ -18,8 +18,8 @@ public class Book {
     private String id;
     private String name;
     private String author;
-    private String totalNumber;
-    private String borrowNumber;
+    private int totalNumber;
+    private int borrowNumber;
     private String location;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id")

@@ -3,9 +3,11 @@ package quanlythuvien.implement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import quanlythuvien.model.Book;
+import quanlythuvien.model.BookBorrow;
 import quanlythuvien.repository.BookRepository;
 import quanlythuvien.service.BookService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,6 +27,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Book checkBook(String id) {
+        return bookRepository.checkBook(id);
+    }
+
+    @Override
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
@@ -38,6 +45,18 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> search(String content) {
         return bookRepository.search(content);
+    }
+
+    @Override
+    public List<String> checkNumberBook(List<String> list) {
+        List<String> list1 = new ArrayList<>();
+        for (String id: list) {
+            int number = bookRepository.findById(id).get().getTotalNumber();
+            if(number <= 0) {
+                list1.add(id);
+            }
+        }
+        return list1;
     }
 
 

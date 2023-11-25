@@ -17,7 +17,7 @@
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js}"></script>
     <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}">
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css}">
-<!--    <script th:src="@{./js/app.js}"></script>-->
+    <script th:src="@{/js/app.js}"></script>
     <script th:src="@{https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js}"></script>
     <script th:src="@{https://www.gstatic.com/firebasejs/7.0.0/firebase-storage.js}"></script>
 
@@ -96,8 +96,12 @@
                     <form th:action="@{/users/new}" th:object = "${newUser}" method="POST">
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label class="control-label"> Mã người dùng</label>
-                                <input class="form-control" name="id" type="text" th:field="*{id}" pattern="[^\s]+" title="Vui lòng nhập nội dung hợp lệ." required>
+                                <label class="control-label"> Tên tài khoản</label>
+                                <input class="form-control" name="id" type="text" th:field="*{username}" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label"> Mật khẩu</label>
+                                <input class="form-control" name="name" type="text" th:field="*{password}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label"> Tên người dùng</label>
@@ -116,15 +120,23 @@
                                 <input class="form-control" name="borrowNumber" type="text" th:field="*{email}">
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="control-label"> Khác </label>
+                                <label class="control-label"> Thông tin khác </label>
                                 <input class="form-control" name="location" th:field="*{other}">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label"> Vai trò </label>
+                                <select th:field="*{roll}" class="form-control">
+                                    <option value="admin">admin</option>
+                                    <option value="user">user</option>
+                                </select>
                             </div>
                         </div>
                         <BR>
-                        <button class="btn btn-save" type="submit">Lưu lại</button>
-                        <a class="btn btn-cancel" data-dismiss="modal" th:href="@{/users}">Hủy bỏ</a>
+                        <button class="btn btn-save" id="saveNewUser" type="submit">Lưu lại</button>
                         <BR>
                     </form>
+                    <button class="btn btn-save hide" onclick="checkSaveUser()" type="submit">Lưu lại</button>
+                    <a class="btn btn-cancel" th:href="@{/users}">Hủy bỏ</a>
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -191,5 +203,5 @@
     }
 </script>
 </body>
-
+<script th:src="@{/js/app.js}"></script>
 </html>

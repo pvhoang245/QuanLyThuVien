@@ -19,6 +19,7 @@
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css}">
     <script th:src="@{https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js}"></script>
     <script th:src="@{https://www.gstatic.com/firebasejs/7.0.0/firebase-storage.js}"></script>
+    <script th:src="@{/js/app.js}"></script>
 
 </head>
 
@@ -78,7 +79,7 @@
             </a>
         </div>
         <div style="width: 25%;">
-            <input type="text" style="width: 300px;height: 30px;" id="searchPro" onkeyup="searchProduct()">
+            <input type="text" style="width: 300px;height: 30px;" id="searchReader" onkeyup="searchReader()">
             <button class="btn btn-primary btn-sm trash" disabled>Tìm kiếm</button>
 
         </div>
@@ -98,7 +99,7 @@
                         </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody id="listSearchReader">
                         <tr th:each="reader: ${readers}">
                             <td th:text="${reader.id}"></td>
                             <td th:text="${reader.name}"></td>
@@ -108,7 +109,7 @@
                             <td>
                                 <a th:href="@{/readers/update/{id}(id=${reader.id})}"
                                    class="btn btn-primary">Update</a>
-                                <a data-toggle="modal" data-target="#deleteModal" th:data-readerId="${reader.id}" th:onclick="preDeleteBook(this.getAttribute('data-readerId'))"
+                                <a data-toggle="modal" data-target="#deleteModal" th:data-readerId="${reader.id}" th:onclick="preDeleteReader(this.getAttribute('data-readerId'))"
                                    class="btn btn-danger">Delete</a>
 <!--                                    <button class="btn btn-danger" data-th-id="${reader.id}" onclick="deleteBookById(this)">Delete</button>-->
 <!--                                    <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</a>-->
@@ -210,6 +211,6 @@
         }
     }
 </script>
-<script th:src="@{js/app.js}"></script>
+<script th:src="@{/js/app.js}"></script>
 </body>
 </html>
