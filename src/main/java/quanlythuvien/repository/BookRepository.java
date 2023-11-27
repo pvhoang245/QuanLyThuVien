@@ -19,4 +19,7 @@ public interface BookRepository extends JpaRepository<Book, String> {
     List<Book> search(@Param("keyword") String keyword);
     @Query("select p from Book p where p.id = :id")
     Book checkBook(String id);
+
+    @Query("select p from Book p order by p.borrowNumber desc")
+    List<Book> reportByBorrow();
 }

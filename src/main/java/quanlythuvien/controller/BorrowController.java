@@ -48,9 +48,26 @@ public class BorrowController {
         return null;
     }
 
+    @GetMapping("/bookborrow/noti")
+    public String notiborrow() {
+        return "noti_borrow";
+    }
+
+    @GetMapping("/bookreturn/noti")
+    public String notireturn() {
+        return "noti_return";
+    }
+
+    @PostMapping("/bookborrow/noti")
+    @ResponseBody
+    public List<Book> notiBorrowBook(@RequestBody BookBorrowDto p){
+        return borrowService.notiBorrowBook(p.getBook());
+    }
+
     @GetMapping("/bookborrow/book/{readerId}")
     public String borrowSearchBook(@PathVariable String readerId, Model model) {
         model.addAttribute("reader", readerService.findReaderById(readerId));
+        model.addAttribute("books", bookService.getAllBooks());
         return "borrow_3";
     }
 

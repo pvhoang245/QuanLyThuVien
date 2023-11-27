@@ -7,6 +7,15 @@ function showNotification(mess) {
         notification.classList.add('notification_hide');
     }, 4000);
 }
+function showNotiAccess(mess) {
+    var notification = document.querySelector('.notification_blue');
+    notification.innerHTML = mess;
+    notification.classList.remove('hide');
+    notification.classList.remove('notification_hide');
+    setTimeout(function () {
+        notification.classList.add('notification_hide');
+    }, 4000);
+}
 
 function preDeleteBook(bookId) {
     console.log(bookId)
@@ -142,7 +151,7 @@ async function addToList(bookId) {
                 }
         })
         .catch(function (error) {
-            alert("Error: " + error.message);
+            console.log("Error: " + error.message);
         });
     if (checkToAdd) return;
     //kiểm tra tồn tại bên hàng chờ chưa
@@ -245,8 +254,7 @@ async function borrowBook() {
     })
         .then(function (response) {
             if (response.ok) {
-                alert("Borrowed successfully!");
-                location.reload();
+                document.getElementById("showNotiBorrow").click();
             } else {
                 throw new Error('Response not OK');
             }
@@ -330,8 +338,7 @@ function returnBook() {
     })
         .then(function (response) {
             if (response.ok) {
-                alert("Returned successfully!");
-                location.reload();
+                document.getElementById("showNotiReturn").click();
             } else {
                 throw new Error('Response not OK');
             }
@@ -378,4 +385,56 @@ async function checkSaveCategory() {
             }
         })
         .catch(error => console.error(error));
+}
+
+async function checkSaveReader() {
+    let id = document.querySelector('input[name="id"]').value;
+    await fetch("http://localhost:8888/readers/check/" + id, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data) {
+                showNotification("Độc giả có mã " + id + " đã có, vui lòng nhập thể mã khác.")
+            } else {
+                document.getElementById("saveNewReader").click();
+            }
+        })
+}
+
+async function notiBorrow(name, mess) {
+    let array = JSON.parse(localStorage.getItem(name));
+    let user = {
+        "book": array
+    }
+    await fetch("http://localhost:8888/bookborrow/noti", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+        .then(response => response.json())
+        .then(datas => {
+            var listUser = document.querySelector('#notiBorrow');
+            var content = datas.map(function(book) {
+                return `<tr>
+                <td>${book.id}</td>
+                <td>${book.name}</td>
+                <td>${book.author}</td>
+                <td>${book.totalNumber}</td>
+                <td>${book.borrowNumber}</td>
+                <td>${book.location}</td>
+                <td>${book.category.name}</td></tr>`;
+            });
+            listUser.innerHTML = content.join('');
+        })
+        .catch(error => console.error(error));
+    setTimeout(function () {
+        showNotiAccess(mess);
+    }, 2000);
+
 }

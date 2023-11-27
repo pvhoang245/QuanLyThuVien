@@ -40,5 +40,10 @@ public class ReaderServiceImpl implements ReaderService {
         return readerRepository.search(content);
     }
 
+    @Override
+    public Reader checkReader(String id) {
+        return readerRepository.findById(id).get();
+    }
+
 
 }

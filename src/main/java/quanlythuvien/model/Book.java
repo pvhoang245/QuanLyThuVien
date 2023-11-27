@@ -21,7 +21,7 @@ public class Book {
     private int totalNumber;
     private int borrowNumber;
     private String location;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category;
     @JsonIgnore

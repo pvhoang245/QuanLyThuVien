@@ -15,4 +15,6 @@ public interface BorrowService {
     BookBorrow update(BookBorrowDto p);
 
     BookBorrow getByUserReaderId(BookBorrowDto p);
+
+    List<Book> notiBorrowBook(List<String> p);
 }

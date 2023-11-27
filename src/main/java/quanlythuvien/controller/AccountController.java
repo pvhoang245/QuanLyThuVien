@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import quanlythuvien.exception.AccountException;
@@ -37,5 +38,10 @@ public class AccountController {
             System.out.println("Sai password");
             return "home";
         }
+    }
+    @GetMapping("/account/delete/{id}")
+    public String deleteBook(@PathVariable int id) {
+        accountService.deletUser(id);
+        return "redirect:/users";
     }
 }

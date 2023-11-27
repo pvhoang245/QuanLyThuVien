@@ -9,5 +9,6 @@ public interface UserService {
     User findUserById(int id);
     User findUserByAccountId(int id);
     List<User> getAllUsers();
-    User deleteNgdung(int id);
+
+    void deleteUser(int id);
 }

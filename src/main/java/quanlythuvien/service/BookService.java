@@ -1,5 +1,6 @@
 package quanlythuvien.service;
 
+import quanlythuvien.model.ReaderCountDto;
 import quanlythuvien.model.Book;
 
 import java.util.List;
@@ -12,4 +13,8 @@ public interface BookService {
     Book deleteBook(String id);
     List<Book> search(String content);
     List<String> checkNumberBook(List<String> list);
+
+    List<Book> reportByBorrow();
+
+    List<ReaderCountDto> reportByReader();
 }

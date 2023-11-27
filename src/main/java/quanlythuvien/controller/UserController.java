@@ -78,8 +78,8 @@ public class UserController {
     }
 
     @GetMapping("/users/delete/{id}")
-    public String deleteNgdung(@PathVariable int id) {
-        userService.deleteNgdung(id);
+    public String deleteBook(@PathVariable int id) {
+        userService.deleteUser(id);
         return "redirect:/users";
     }
 

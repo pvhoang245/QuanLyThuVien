@@ -2,9 +2,10 @@ package quanlythuvien.implement;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import quanlythuvien.model.ReaderCountDto;
 import quanlythuvien.model.Book;
-import quanlythuvien.model.BookBorrow;
 import quanlythuvien.repository.BookRepository;
+import quanlythuvien.repository.BorrowRepository;
 import quanlythuvien.service.BookService;
 
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private BorrowRepository borrowRepository;
 
     @Override
     public Book saveBook(Book book) {
@@ -57,6 +61,16 @@ public class BookServiceImpl implements BookService {
             }
         }
         return list1;
+    }
+
+    @Override
+    public List<Book> reportByBorrow() {
+        return bookRepository.reportByBorrow();
+    }
+
+    @Override
+    public List<ReaderCountDto> reportByReader() {
+        return borrowRepository.reportByReader();
     }
 
 

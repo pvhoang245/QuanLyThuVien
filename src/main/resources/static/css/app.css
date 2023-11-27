@@ -31,6 +31,19 @@
     animation: slideIn 0.5s ease-in-out forwards; /* Hiệu ứng trượt vào */
 }
 
+.notification_blue {
+    position: fixed;
+    z-index: 20;
+    top: 50px;
+    right: -200px; /* Ban đầu ẩn nó bên ngoài màn hình */
+    padding: 15px;
+    background-color: #18af07;
+    color: white;
+    border-radius: 5px;
+    width: 300px;
+    animation: slideIn 0.5s ease-in-out forwards; /* Hiệu ứng trượt vào */
+}
+
 @keyframes slideIn {
     from {
         right: -300px; /* Vị trí bên ngoài màn hình khi bắt đầu */

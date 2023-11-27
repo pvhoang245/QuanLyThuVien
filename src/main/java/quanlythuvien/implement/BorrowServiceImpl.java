@@ -12,6 +12,7 @@ import quanlythuvien.service.BorrowService;
 import quanlythuvien.service.ReaderService;
 import quanlythuvien.service.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -74,5 +75,14 @@ public class BorrowServiceImpl implements BorrowService {
         String readerId = p.getReaderId();
         String bookId = p.getStatus();
         return borrowRepository.findToReturn(readerId, bookId);
+    }
+
+    @Override
+    public List<Book> notiBorrowBook(List<String> p) {
+        List<Book> list = new ArrayList<>();
+        for(String id: p) {
+            list.add(bookService.findBookById(id));
+        }
+        return list;
     }
 }

@@ -35,7 +35,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public int getFinalCategory() {
-        return categoryRepository.getFinalCategory().getId()+1;
+        Category category = categoryRepository.getFinalCategory();
+        if(category == null) {
+            return 1;
+        }
+        else return categoryRepository.getFinalCategory().getId()+1;
     }
 
     @Override

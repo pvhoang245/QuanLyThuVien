@@ -36,11 +36,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User deleteNgdung(int id) {
-        User u = findUserById(id);
-        userRepository.delete(u);
-        return null;
+    @Transactional
+    public void deleteUser(int id) {
+        userRepository.deleteId(id);
     }
+
 
 
 }

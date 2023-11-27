@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import quanlythuvien.model.Book;
+import quanlythuvien.model.Category;
 import quanlythuvien.model.Reader;
 import quanlythuvien.service.ReaderService;
 
@@ -70,6 +71,14 @@ public class ReaderController {
             return readerService.getAllReaders();
         }
         else return readerService.searchReader(content);
+    }
+
+    @PostMapping("/readers/check/{id}")
+    @ResponseBody
+    public String checkReader(@PathVariable String id) {
+        Reader reader = readerService.checkReader(id);
+        if (reader!=null) return "true";
+        else return "false";
     }
 
 }

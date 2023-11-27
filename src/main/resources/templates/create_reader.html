@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}">
     <!--  <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css}">-->
     <!--  &lt;!&ndash; or &ndash;&gt;-->
     <!--  <link rel="stylesheet" th:href="@{https://unpkg.com/boxicons@latest/css/boxicons.min.css}">-->
@@ -17,7 +18,7 @@
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js}"></script>
     <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}">
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css}">
-<!--    <script th:src="@{./js/app.js}"></script>-->
+    <script th:src="@{/js/app.js}"></script>
     <script th:src="@{https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js}"></script>
     <script th:src="@{https://www.gstatic.com/firebasejs/7.0.0/firebase-storage.js}"></script>
 
@@ -43,8 +44,7 @@
 <aside class="app-sidebar">
     <div class="app-sidebar__user">
         <div>
-            <p class="app-sidebar__user-name"><b>Admin</b></p>
-            <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+             <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>}
         </div>
     </div>
     <hr>
@@ -57,18 +57,23 @@
                 class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sách</span></a>
         </li>
         <li><a class="app-menu__item" th:href="@{/users}"><i class='app-menu__icon bx bx-task'></i><span
-                class="app-menu__label">Qua lý người dùng</span></a></li>
+                class="app-menu__label">Quản lý người dùng</span></a></li>
         <li><a class="app-menu__item" th:href="@{/bookborrow}"><i class='app-menu__icon bx bx-task'></i><span
                 class="app-menu__label">Mượn sách</span></a></li>
         <li><a class="app-menu__item" th:href="@{/bookreturn}"><i class='app-menu__icon bx bx-task'></i><span
                 class="app-menu__label">Trả sách</span></a></li>
+        <li><a class="app-menu__item" th:href="@{/report}"><i class='app-menu__icon bx bx-task'></i><span
+                class="app-menu__label">Thống kê</span></a></li>
     </ul>
 </aside>
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a th:href="@{#}"><b>Danh sách người đọc</b></a></li>
+            <li class="breadcrumb-item active"><a th:href="@{#}"><b>Thêm độc giả</b></a></li>
         </ul>
+        <div class="notification hide notification_hide">
+
+        </div>
         <div id="clock"></div>
     </div>
             <div class="modal-content">
@@ -104,10 +109,12 @@
                             </div>
                         </div>
                         <BR>
-                        <button class="btn btn-save" type="submit">Lưu lại</button>
-                        <a class="btn btn-cancel" data-dismiss="modal" th:href="@{/readers}">Hủy bỏ</a>
+                        <button class="btn btn-save hide" id="saveNewReader" type="submit">Lưu lại</button>
+
                         <BR>
                     </form>
+                    <button class="btn btn-save" onclick="checkSaveReader()">Lưu lại</button>
+                    <a class="btn btn-cancel" data-dismiss="modal" th:href="@{/readers}">Hủy bỏ</a>
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -117,19 +124,19 @@
 
 
 <!-- Essential javascripts for application to work-->
-<script th:src="@{js/jquery-3.2.1.min.js}"></script>
-<script th:src="@{js/popper.min.js}"></script>
-<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{/js/plugins/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/plugins/popper.min.js}"></script>
+<script th:src="@{/js/plugins/bootstrap.min.js}"></script>
 <script th:src="@{//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js}"></script>
-<script th:src="@{src/jquery.table2excel.js}"></script>
+<!--<script th:src="@{src/jquery.table2excel.js}"></script>-->
 <!-- <script th:src="@{s/main.js"></script> -->
 <!-- The javascript plugin to display page loading on top-->
-<script th:src="@{js/plugins/pace.min.js}"></script>
+<script th:src="@{/js/plugins/pace.min.js}"></script>
 <!-- Page specific javascripts-->
 <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js}"></script>
 <!-- Data table plugin-->
-<script type="text/javascript" th:src="@{js/plugins/jquery.dataTables.min.js}"></script>
-<script type="text/javascript" th:src="@{js/plugins/dataTables.bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/dataTables.bootstrap.min.js}"></script>
 <script type="text/javascript">
     $('#sampleTable').DataTable();
     //Thời Gian
@@ -174,5 +181,5 @@
     }
 </script>
 </body>
-
+<script th:src="@{/js/app.js}"></script>
 </html>

@@ -8,17 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Main CSS-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
-    <!--  <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css}">-->
-    <!--  &lt;!&ndash; or &ndash;&gt;-->
-    <!--  <link rel="stylesheet" th:href="@{https://unpkg.com/boxicons@latest/css/boxicons.min.css}">-->
-
-    <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}">
-    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js}"></script>
     <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.8.2/css/all.css}">
-    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css}">
-    <script th:src="@{https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js}"></script>
-    <script th:src="@{https://www.gstatic.com/firebasejs/7.0.0/firebase-storage.js}"></script>
     <script th:src="@{/js/app.js}"></script>
 
 </head>
@@ -33,7 +24,7 @@
 
 
         <!-- User Menu-->
-        <li><a class="app-nav__item" th:href="@{/index.html}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+        <li><a class="app-nav__item" th:href="@{/home}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
         </li>
     </ul>
@@ -43,8 +34,7 @@
 <aside class="app-sidebar">
     <div class="app-sidebar__user">
         <div>
-            <p class="app-sidebar__user-name"><b>Admin</b></p>
-            <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+             <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>}
         </div>
     </div>
     <hr>
@@ -57,11 +47,13 @@
                 class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sách</span></a>
         </li>
         <li><a class="app-menu__item" th:href="@{/users}"><i class='app-menu__icon bx bx-task'></i><span
-                class="app-menu__label">Qua lý người dùng</span></a></li>
+                class="app-menu__label">Quản lý người dùng</span></a></li>
         <li><a class="app-menu__item" th:href="@{/bookborrow}"><i class='app-menu__icon bx bx-task'></i><span
                 class="app-menu__label">Mượn sách</span></a></li>
         <li><a class="app-menu__item" th:href="@{/bookreturn}"><i class='app-menu__icon bx bx-task'></i><span
                 class="app-menu__label">Trả sách</span></a></li>
+        <li><a class="app-menu__item" th:href="@{/report}"><i class='app-menu__icon bx bx-task'></i><span
+                class="app-menu__label">Thống kê</span></a></li>
     </ul>
 </aside>
 <main class="app-content">
@@ -115,7 +107,7 @@
                                    class="btn btn-primary">Update</a>
                                 <a data-toggle="modal" data-target="#deleteModal" th:data-bookId="${book.id}" th:onclick="preDeleteBook(this.getAttribute('data-bookId'))"
                                    class="btn btn-danger">Delete</a>
-
+                                <button class="hide" id="createUserId" th:data-userId="${userId}" th:onclick="createUserId(this.getAttribute('data-userId'))"></button>
                             </td>
                         </tr>
                         </tbody>
@@ -150,12 +142,12 @@
     </div>
 </div>
 <script>
-    preCreateUserId();
-    function preCreateUserId() {
-        document.querySelector("#createUserId").click();
-    }
+    // preCreateUserId();
+    // function preCreateUserId() {
+    //     document.querySelector("#createUserId").click();
+    // }
     function createUserId(userId) {
-        localStorage.setItem("userId", JSON.stringify(userId));
+        localStorage.setItem("userId", JSON.stringify(3));
     }
 </script>
 <!--<script  th:inline="javascript">-->

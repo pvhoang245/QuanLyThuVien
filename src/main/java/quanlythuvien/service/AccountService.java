@@ -12,4 +12,6 @@ public interface AccountService {
     Account createAccount(Account account);
 
     Account findAccountByUsername(String username);
+
+    void deletUser(int id);
 }

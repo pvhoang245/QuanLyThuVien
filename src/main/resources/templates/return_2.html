@@ -33,7 +33,7 @@
 
 
         <!-- User Menu-->
-        <li><a class="app-nav__item" th:href="@{/index.html}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+        <li><a class="app-nav__item" th:href="@{/home}"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
         </li>
     </ul>
@@ -43,8 +43,7 @@
 <aside class="app-sidebar">
     <div class="app-sidebar__user">
         <div>
-            <p class="app-sidebar__user-name"><b>Admin</b></p>
-            <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+             <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>}
         </div>
     </div>
     <hr>
@@ -57,17 +56,19 @@
                 class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sách</span></a>
         </li>
         <li><a class="app-menu__item" th:href="@{/users}"><i class='app-menu__icon bx bx-task'></i><span
-                class="app-menu__label">Qua lý người dùng</span></a></li>
+                class="app-menu__label">Quản lý người dùng</span></a></li>
         <li><a class="app-menu__item" th:href="@{/bookborrow}"><i class='app-menu__icon bx bx-task'></i><span
                 class="app-menu__label">Mượn sách</span></a></li>
         <li><a class="app-menu__item active" th:href="@{/bookreturn}"><i class='app-menu__icon bx bx-task'></i><span
                 class="app-menu__label">Trả sách</span></a></li>
+        <li><a class="app-menu__item" th:href="@{/report}"><i class='app-menu__icon bx bx-task'></i><span
+                class="app-menu__label">Thống kê</span></a></li>
     </ul>
 </aside>
 <main class="app-content">
     <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-            <li class="breadcrumb-item active"><a th:href="@{#}"><b>Danh sách cuốn sách</b></a></li>
+            <li class="breadcrumb-item active"><a th:href="@{#}"><b>Trả sách</b></a></li>
         </ul>
         <div id="clock"></div>
     </div>

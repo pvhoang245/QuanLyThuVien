@@ -21,7 +21,7 @@ public class User {
     private String phone;
     private String email;
     private String other;
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     private Account account;
     @JsonIgnore
